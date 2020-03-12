@@ -1,15 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>e</title>
     <script src="pixi.js"></script>
-    <style>* {padding: 0; margin: 0}</style>
+    <style>
+        * {
+            padding: 0;
+            margin: 0
+        }
+    </style>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-160421329-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-160421329-1');
+    </script>
+
 </head>
+
 <body>
-<div>
-    <canvas id="game-scene"></canvas>
-</div>
+    <div>
+        <canvas id="game-scene"></canvas>
+    </div>
     <script src="e.js"></script>
 </body>
+
 </html>
