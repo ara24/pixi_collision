@@ -367,8 +367,9 @@ function play() {
 function end() {
     gameScene.visible = false;
     gameOverScene.visible = true;
-    gtag('event', '점수', {
+    gtag('event', '게임오버', {
         'event_category': '버블 피하기 게임',
+        'event_label': '점수',
         'value': ms
     })
 }
