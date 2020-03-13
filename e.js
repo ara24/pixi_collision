@@ -345,12 +345,21 @@ function play() {
     if (hitSomething(bunny, healthBar)) {
         healthBar.x = bunny.x - 16;
         healthBar.y = bunny.y - 6;
+        gtag('event', 'HP 장착', {
+            'event_category': '버블 피하기 게임',
+            'event_label': '장착 시점',
+            'value': ms
+        })
     }
 
     // 토끼가 하트 아이콘에 닿았을 때,
     if (hitSomething(bunny, heartIcon)) {
-        if (healthBar.outer.width < 32)
+        if (healthBar.outer.width < 32) {
             healthBar.outer.width += 1;
+        }
+        gtag('event', 'HP 채우기', {
+            'event_category': '버블 피하기 게임',
+        })
     }
 
 
