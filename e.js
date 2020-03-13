@@ -19,14 +19,14 @@ var Container = PIXI.Container,
 var canvas = document.getElementById("game-scene")
 var stage = new Container(),
 
-    renderer = new PIXI.CanvasRenderer(512, 384, {view: canvas});
+    renderer = new PIXI.CanvasRenderer(512, 384, { view: canvas });
 
 renderer.view.style.position = "absolute";
 renderer.view.style.display = "block";
 renderer.autoResize = true;
 renderer.resize(window.innerWidth, window.innerHeight);
 
-    document.body.appendChild(renderer.view);
+document.body.appendChild(renderer.view);
 
 // 이렇게 하면 스프라이트 끝부분 깨짐
 //     renderer = autoDetectRenderer(
@@ -59,7 +59,7 @@ var v = 8; // 토끼 속도
 
 
 function setup() {
-    console.log("setup() 호출");
+    // console.log("setup() 호출");
 
 
     // 배경 추가
@@ -87,8 +87,8 @@ function setup() {
 
     // 토끼 추가
     bunny = new Sprite(resources["images/bunny.png"].texture);
-    bunny.x = window.innerWidth/2 - bunny.width/2;
-    bunny.y = window.innerHeight/2 - bunny.height/2;
+    bunny.x = window.innerWidth / 2 - bunny.width / 2;
+    bunny.y = window.innerHeight / 2 - bunny.height / 2;
     bunny.vx = 0;
     bunny.vy = 0;
     gameScene.addChild(bunny);
@@ -104,7 +104,7 @@ function setup() {
 
     hp = new Text(
         "HP",
-        {font: "12px Futura", fill: "white"}
+        { fontSize: 12, fontFamily: "Futura", fill: "white" }
     );
     hp.x = 0;
     hp.y = 0;
@@ -132,7 +132,7 @@ function setup() {
 
     heart = new Text(
         "♥",
-        {font: "23px", fill: "red"}
+        { fontSize: 23, fontFamily: "Futura", fill: "red" }
     );
     heart.x = 0;
     heart.y = 0;
@@ -145,7 +145,7 @@ function setup() {
     strScoreValue = "score : ";
     scoreValue = new Text(
         strScoreValue + "0",
-        {font: "12px Futura", fill: "white"}
+        { fontSize: 12, fontFamily: "Futura", fill: "white" }
     );
     scoreValue.x = 0;
     scoreValue.y = 0;
@@ -161,7 +161,7 @@ function setup() {
     //Create the text sprite and add it to the `gameOver` scene
     message = new Text(
         "GAME OVER!",
-        {font: "64px Futura", fill: "white"}
+        { fontSize: 64, fontFamily: "Futura", fill: "white" }
     );
     message.x = renderer.width / 2 - message.width / 2;
     message.y = stage.height / 2 - 32;
@@ -182,7 +182,7 @@ function setup() {
 }
 
 function keyboardMethodSetup() {
-    console.log("keyboardMethodSetup() 호출");
+    // console.log("keyboardMethodSetup() 호출");
 
     //Capture the keyboard arrow keys
     var left = keyboard(37),
@@ -191,7 +191,7 @@ function keyboardMethodSetup() {
         down = keyboard(40);
 
     //Left arrow key `press` method
-    left.press = function() {
+    left.press = function () {
 
         //Change the bunny's velocity when the key is pressed
         bunny.vx = -v;
@@ -199,7 +199,7 @@ function keyboardMethodSetup() {
     };
 
     //Left arrow key `release` method
-    left.release = function() {
+    left.release = function () {
 
         //If the left arrow has been released, and the right arrow isn't down,
         //and the bunny isn't moving vertically:
@@ -210,33 +210,33 @@ function keyboardMethodSetup() {
     };
 
     //Up
-    up.press = function() {
+    up.press = function () {
         bunny.vy = -v;
         bunny.vx = 0;
     };
-    up.release = function() {
+    up.release = function () {
         if (!down.isDown && bunny.vx === 0) {
             bunny.vy = 0;
         }
     };
 
     //Right
-    right.press = function() {
+    right.press = function () {
         bunny.vx = v;
         bunny.vy = 0;
     };
-    right.release = function() {
+    right.release = function () {
         if (!left.isDown && bunny.vy === 0) {
             bunny.vx = 0;
         }
     };
 
     //Down
-    down.press = function() {
+    down.press = function () {
         bunny.vy = v;
         bunny.vx = 0;
     };
-    down.release = function() {
+    down.release = function () {
         if (!up.isDown && bunny.vx === 0) {
             bunny.vy = 0;
         }
@@ -244,7 +244,7 @@ function keyboardMethodSetup() {
 }
 
 function gameLoop() {
-    console.log("gameLoop()");
+    // console.log("gameLoop()");
 
 
     //Update the current game state
@@ -260,41 +260,41 @@ function createBubble() {
 
     // for(var i = 0; i < numberOfBubbles; i++) {
 
-        var bubbleSize = randomInt(1,2);
-        // console.log(bubbleSize);
+    var bubbleSize = randomInt(1, 2);
+    // console.log(bubbleSize);
 
-        var speed = randomInt(4, 9);
-        // console.log("i =", i, "speed=", speed);
+    var speed = randomInt(4, 9);
+    // console.log("i =", i, "speed=", speed);
 
-        // Make a bubble
-        if(bubbleSize == 1) {
-            var bubble = new Sprite(resources["images/bubble_32x32.png"].texture);
-        }
-        else {
-            var bubble = new Sprite(resources["images/bubble_64x64.png"].texture);
-        }
+    // Make a bubble
+    if (bubbleSize == 1) {
+        var bubble = new Sprite(resources["images/bubble_32x32.png"].texture);
+    }
+    else {
+        var bubble = new Sprite(resources["images/bubble_64x64.png"].texture);
+    }
 
-        var x = renderer.width + 64;
-        var y = randomInt(0, renderer.height - bubble.height);
+    var x = renderer.width + 64;
+    var y = randomInt(0, renderer.height - bubble.height);
 
-        bubble.x = x;
-        bubble.y = y;
-        bubble.vx = speed;  // 스피드 랜덤
-        bubble.vy = 0;
+    bubble.x = x;
+    bubble.y = y;
+    bubble.vx = speed;  // 스피드 랜덤
+    bubble.vy = 0;
 
-        bubbles.push(bubble);
+    bubbles.push(bubble);
 
-        gameScene.addChild(bubble);
+    gameScene.addChild(bubble);
 
 
-    setTimeout(function() {
-        if(gameScene.visible) {
-            console.log("1초 경과");
+    setTimeout(function () {
+        if (gameScene.visible) {
+            // console.log("1초 경과");
             createBubble();
         }
-    }, 300/window.innerHeight*300);
+    }, 300 / window.innerHeight * 300);
 
-            // }, 300/window.innerHeight*300*i);
+    // }, 300/window.innerHeight*300*i);
     // }
 }
 
@@ -308,25 +308,27 @@ function play() {
     bunny.y += bunny.vy;
 
     // 범위 설정
-    contain(bunny, {x: 0, y: 0, width: renderer.width, height: renderer.height});
+    contain(bunny, { x: 0, y: 0, width: renderer.width, height: renderer.height });
 
 
     var bunnyHit = false;
 
-    bubbles.forEach(function(bubble) {
+    bubbles.forEach(function (bubble) {
         // 버블 이동
         bubble.x -= bubble.vx;
         // 범위 설정
-        contain(bubble, {x: 0 - bubble.width, y: 0 - bubble.height,
-            width: renderer.width*3, height: renderer.height + bubble.height});
+        contain(bubble, {
+            x: 0 - bubble.width, y: 0 - bubble.height,
+            width: renderer.width * 3, height: renderer.height + bubble.height
+        });
 
-        if(hitSomething(bunny, bubble)) {
+        if (hitSomething(bunny, bubble)) {
             bunnyHit = true;
         }
     });
 
     // 토끼가 버블에 닿았을 때
-    if(bunnyHit) {
+    if (bunnyHit) {
         bunny.alpha = 0.5;
         healthBar.outer.width -= 1;
     }
@@ -335,26 +337,26 @@ function play() {
     }
 
     // 체력 다 떨어졌을 때
-    if(healthBar.outer.width < 0) {
+    if (healthBar.outer.width < 0) {
         state = end;
     }
 
     // 토끼가 HP에 닿았을 때,
-    if(hitSomething(bunny, healthBar)) {
+    if (hitSomething(bunny, healthBar)) {
         healthBar.x = bunny.x - 16;
         healthBar.y = bunny.y - 6;
     }
 
     // 토끼가 하트 아이콘에 닿았을 때,
-    if(hitSomething(bunny, heartIcon)) {
-        if(healthBar.outer.width < 32)
+    if (hitSomething(bunny, heartIcon)) {
+        if (healthBar.outer.width < 32)
             healthBar.outer.width += 1;
     }
 
 
     // 스코어 뿌려주기
     ms += 1;
-    scoreValue.text = strScoreValue + Math.floor(ms/10);
+    scoreValue.text = strScoreValue + ms;
 
 
     //Loop this function 60 times per second
@@ -365,6 +367,10 @@ function play() {
 function end() {
     gameScene.visible = false;
     gameOverScene.visible = true;
+    gtag('event', '점수', {
+        'event_category': '버블 피하기 게임',
+        'value': ms
+    })
 }
 
 
@@ -410,7 +416,7 @@ function keyboard(keyCode) {
     key.press = undefined;
     key.release = undefined;
     //The `downHandler`
-    key.downHandler = function(event) {
+    key.downHandler = function (event) {
         if (event.keyCode === key.code) {
             if (key.isUp && key.press) key.press();
             key.isDown = true;
@@ -420,7 +426,7 @@ function keyboard(keyCode) {
     };
 
     //The `upHandler`
-    key.upHandler = function(event) {
+    key.upHandler = function (event) {
         if (event.keyCode === key.code) {
             if (key.isDown && key.release) key.release();
             key.isDown = false;
